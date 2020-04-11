@@ -1,0 +1,444 @@
+{
+  "modules": [
+    {
+      "id": "d5bd9b65-2a55-4a3c-bbd5-51289d11c02a",
+      "type": "SetVoice",
+      "branches": [
+        {
+          "condition": "Success",
+          "transition": "46a4bc33-7172-4ad1-8e0a-1cc12690247f"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "GlobalVoice",
+          "value": "Mia"
+        }
+      ],
+      "metadata": {
+        "position": {
+          "x": 165,
+          "y": 26
+        }
+      }
+    },
+    {
+      "id": "46a4bc33-7172-4ad1-8e0a-1cc12690247f",
+      "type": "PlayPrompt",
+      "branches": [
+        {
+          "condition": "Success",
+          "transition": "b41501a0-75b4-4571-af3a-a2e91fa1d21d"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "Text",
+          "value": "Bienvenido a la aplicación de auto-diagnóstico del coronavirus de BBVA Next Technologies",
+          "namespace": null
+        },
+        {
+          "name": "TextToSpeechType",
+          "value": "text"
+        }
+      ],
+      "metadata": {
+        "position": {
+          "x": 384,
+          "y": 26
+        },
+        "useDynamic": false
+      }
+    },
+    {
+      "id": "9d23e242-bdae-4bf9-9021-c59c02ba5626",
+      "type": "PlayPrompt",
+      "branches": [
+        {
+          "condition": "Success",
+          "transition": "b41501a0-75b4-4571-af3a-a2e91fa1d21d"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "Text",
+          "value": "Disculpe, no hemos recibido una respuesta correcta.",
+          "namespace": null
+        },
+        {
+          "name": "TextToSpeechType",
+          "value": "text"
+        }
+      ],
+      "metadata": {
+        "position": {
+          "x": 776,
+          "y": 466
+        },
+        "useDynamic": false
+      }
+    },
+    {
+      "id": "b41501a0-75b4-4571-af3a-a2e91fa1d21d",
+      "type": "GetUserInput",
+      "branches": [
+        {
+          "condition": "Evaluate",
+          "conditionType": "Equals",
+          "conditionValue": "1",
+          "transition": "a58a74d8-4ac5-4407-ad1e-e35d2ac1b03b"
+        },
+        {
+          "condition": "Evaluate",
+          "conditionType": "Equals",
+          "conditionValue": "*",
+          "transition": "34edca6f-2025-4a91-8750-3529286cfc7f"
+        },
+        {
+          "condition": "Timeout",
+          "transition": "9d23e242-bdae-4bf9-9021-c59c02ba5626"
+        },
+        {
+          "condition": "NoMatch",
+          "transition": "9d23e242-bdae-4bf9-9021-c59c02ba5626"
+        },
+        {
+          "condition": "Error",
+          "transition": "5c263e68-1f3c-48ea-8906-53643fb66105"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "Text",
+          "value": "Pulse 1 para hacer el autodiagnóstico.\nPulse asterisco para salir.",
+          "namespace": null
+        },
+        {
+          "name": "TextToSpeechType",
+          "value": "text"
+        },
+        {
+          "name": "Timeout",
+          "value": "5"
+        },
+        {
+          "name": "MaxDigits",
+          "value": "1"
+        }
+      ],
+      "metadata": {
+        "position": {
+          "x": 602,
+          "y": 29
+        },
+        "conditionMetadata": [
+          {
+            "id": "2bcf9c78-b60f-4171-8372-fe29a2918d18",
+            "value": "1"
+          },
+          {
+            "id": "88f254c5-9920-46a3-9778-db2e1832626d",
+            "value": "*"
+          }
+        ],
+        "useDynamic": false
+      },
+      "target": "Digits"
+    },
+    {
+      "id": "ebbb5460-b2e1-4b33-947e-58bcc21ea9bb",
+      "type": "SetAttributes",
+      "branches": [
+        {
+          "condition": "Success",
+          "transition": "9f1d31ea-9dd5-4a32-a945-7cbd75399dfb"
+        },
+        {
+          "condition": "Error",
+          "transition": "5c263e68-1f3c-48ea-8906-53643fb66105"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "Attribute",
+          "value": "continue",
+          "key": "continue",
+          "namespace": "External"
+        },
+        {
+          "name": "Attribute",
+          "value": "text",
+          "key": "text",
+          "namespace": "External"
+        },
+        {
+          "name": "Attribute",
+          "value": "score",
+          "key": "score",
+          "namespace": "External"
+        },
+        {
+          "name": "Attribute",
+          "value": "answerScore",
+          "key": "answerScore",
+          "namespace": "External"
+        },
+        {
+          "name": "Attribute",
+          "value": "step",
+          "key": "step",
+          "namespace": "External"
+        }
+      ],
+      "metadata": {
+        "position": {
+          "x": 1111,
+          "y": 20
+        }
+      }
+    },
+    {
+      "id": "34edca6f-2025-4a91-8750-3529286cfc7f",
+      "type": "Disconnect",
+      "branches": [],
+      "parameters": [],
+      "metadata": {
+        "position": {
+          "x": 1976,
+          "y": 350
+        }
+      }
+    },
+    {
+      "id": "ddd24c63-3c96-4464-987a-e487ec8c24e1",
+      "type": "PlayPrompt",
+      "branches": [
+        {
+          "condition": "Success",
+          "transition": "34edca6f-2025-4a91-8750-3529286cfc7f"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "Text",
+          "value": "text",
+          "namespace": "User Defined"
+        },
+        {
+          "name": "TextToSpeechType",
+          "value": "text"
+        }
+      ],
+      "metadata": {
+        "position": {
+          "x": 1596,
+          "y": 21
+        },
+        "useDynamic": true
+      }
+    },
+    {
+      "id": "9f1d31ea-9dd5-4a32-a945-7cbd75399dfb",
+      "type": "CheckAttribute",
+      "branches": [
+        {
+          "condition": "NoMatch",
+          "transition": "ddd24c63-3c96-4464-987a-e487ec8c24e1"
+        },
+        {
+          "condition": "Evaluate",
+          "conditionType": "Equals",
+          "conditionValue": "1",
+          "transition": "349312e3-7b23-499c-a8ae-4bef417374c1"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "Attribute",
+          "value": "continue"
+        },
+        {
+          "name": "Namespace",
+          "value": "User Defined"
+        }
+      ],
+      "metadata": {
+        "position": {
+          "x": 1355,
+          "y": 12
+        },
+        "conditionMetadata": [
+          {
+            "id": "a874182b-cdca-42ee-8502-c2c326b83896",
+            "operator": {
+              "name": "Es igual que",
+              "value": "Equals",
+              "shortDisplay": "="
+            },
+            "value": "1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "a58a74d8-4ac5-4407-ad1e-e35d2ac1b03b",
+      "type": "InvokeExternalResource",
+      "branches": [
+        {
+          "condition": "Success",
+          "transition": "ebbb5460-b2e1-4b33-947e-58bcc21ea9bb"
+        },
+        {
+          "condition": "Error",
+          "transition": "5c263e68-1f3c-48ea-8906-53643fb66105"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "FunctionArn",
+          "value": "ID_FN_LAMBDA",
+          "namespace": null
+        },
+        {
+          "name": "TimeLimit",
+          "value": "3"
+        }
+      ],
+      "metadata": {
+        "position": {
+          "x": 874,
+          "y": 22
+        },
+        "dynamicMetadata": {},
+        "useDynamic": false
+      },
+      "target": "Lambda"
+    },
+    {
+      "id": "5c263e68-1f3c-48ea-8906-53643fb66105",
+      "type": "PlayPrompt",
+      "branches": [
+        {
+          "condition": "Success",
+          "transition": "34edca6f-2025-4a91-8750-3529286cfc7f"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "Text",
+          "value": "Error técnico. Pruébelo de nuevo más tarde. Muchas gracias.",
+          "namespace": null
+        },
+        {
+          "name": "TextToSpeechType",
+          "value": "text"
+        }
+      ],
+      "metadata": {
+        "position": {
+          "x": 1165,
+          "y": 252
+        },
+        "useDynamic": false
+      }
+    },
+    {
+      "id": "349312e3-7b23-499c-a8ae-4bef417374c1",
+      "type": "StoreUserInput",
+      "branches": [
+        {
+          "condition": "Success",
+          "transition": "1db8c7ec-8ee4-496b-9f5d-70a8d430f408"
+        },
+        {
+          "condition": "Error",
+          "transition": "5c263e68-1f3c-48ea-8906-53643fb66105"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "Text",
+          "value": "text",
+          "namespace": "User Defined"
+        },
+        {
+          "name": "TextToSpeechType",
+          "value": "text"
+        },
+        {
+          "name": "CustomerInputType",
+          "value": "Custom"
+        },
+        {
+          "name": "Timeout",
+          "value": "3"
+        },
+        {
+          "name": "MaxDigits",
+          "value": 1
+        },
+        {
+          "name": "EncryptEntry",
+          "value": false
+        },
+        {
+          "name": "DisableCancel",
+          "value": false
+        }
+      ],
+      "metadata": {
+        "position": {
+          "x": 1379,
+          "y": 525
+        },
+        "useDynamic": true,
+        "useDynamicForEncryptionKeys": true,
+        "useDynamicForTerminatorDigits": false,
+        "countryCodePrefix": "+1"
+      }
+    },
+    {
+      "id": "1db8c7ec-8ee4-496b-9f5d-70a8d430f408",
+      "type": "SetAttributes",
+      "branches": [
+        {
+          "condition": "Success",
+          "transition": "a58a74d8-4ac5-4407-ad1e-e35d2ac1b03b"
+        },
+        {
+          "condition": "Error",
+          "transition": "5c263e68-1f3c-48ea-8906-53643fb66105"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "Attribute",
+          "value": "Stored customer input",
+          "key": "answer",
+          "namespace": "System"
+        }
+      ],
+      "metadata": {
+        "position": {
+          "x": 1012,
+          "y": 547
+        }
+      }
+    }
+  ],
+  "version": "1",
+  "type": "contactFlow",
+  "start": "d5bd9b65-2a55-4a3c-bbd5-51289d11c02a",
+  "metadata": {
+    "entryPointPosition": {
+      "x": 20,
+      "y": 20
+    },
+    "snapToGrid": false,
+    "name": "demo-ninja",
+    "description": null,
+    "type": "contactFlow",
+    "status": "published",
+    "hash": "3b7ed32e4470a458844939fc8206cba7fefa8a9337082de3664413fa2ba17191"
+  }
+}
