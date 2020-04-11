@@ -1,5 +1,3 @@
-![BBVA Next Technologies](assets/logo.png)
-
 # Covid19 Contact Center
 
 Contact center para la evaluación del covid-19 desarrollado sobre AWS Connect
